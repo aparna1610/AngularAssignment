@@ -27,11 +27,11 @@ export class ProductsEffect {
   loadAllProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(invokeProductsAPI),
-      withLatestFrom(this.store.pipe(select(selectProducts))),
-      mergeMap(([, productformStore]) => {
-        if (productformStore.length > 0) {
-          return EMPTY;
-        }
+     // withLatestFrom(this.store.pipe(select(selectProducts))),
+      mergeMap(() => {
+        // if (productformStore.length > 0) {
+        //   return EMPTY;
+        // }
         return this.productsService
           .get()
           .pipe(map((data) => productsFetchAPISuccess({ allProducts: data })));
@@ -44,13 +44,13 @@ export class ProductsEffect {
       ofType(invokeSaveNewProductAPI),
       switchMap((action) => {
         this.appStore.dispatch(
-          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [] } })
+          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [],  order: [] } })
         );
         return this.productsService.create(action.newProduct).pipe(
           map((data) => {
             this.appStore.dispatch(
               setAPIStatus({
-                apiStatus: { apiResponseMessage: '', apiStatus: 'success', shopping: [] },
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success', shopping: [],  order: [] },
               })
             );
             return saveNewProductAPISucess({ newProduct: data });
@@ -65,14 +65,13 @@ export class ProductsEffect {
       ofType(invokeUpdateProductAPI),
       switchMap((action) => {
         this.appStore.dispatch(
-          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [] } })
+          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [], order: [] } })
         );
         return this.productsService.update(action.updateProduct).pipe(
           map((data) => {
             this.appStore.dispatch(
               setAPIStatus({
-                apiStatus: { apiResponseMessage: '', apiStatus: 'success', shopping: [] },
-              })
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success', shopping: [], order: [] },              })
             );
             return updateProductAPISucess({ updateProduct: data });
           })
@@ -92,7 +91,7 @@ export class ProductsEffect {
           map(() => {
             this.appStore.dispatch(
               setAPIStatus({
-                apiStatus: { apiResponseMessage: '', apiStatus: 'success', shopping: [] },
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success', shopping: [], order: [] },
               })
             );
             return deleteProductAPISuccess({ id: actions.id });

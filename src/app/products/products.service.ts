@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Products } from './store/products';
-import { Order } from './store/order';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +21,6 @@ export class ProductsService {
       payload
     );
   }
-
-  addToCart(order: Order): Observable<Order> {
-    return this.http.post<Order>(`http://localhost:3000/products/`, order);
-}
 
   delete(id: number) {
     return this.http.delete(`http://localhost:3000/products/${id}`);

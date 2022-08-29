@@ -1,22 +1,16 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": 3,
       "name": "Samsung Galaxy S10+",
       "taxAmount": 21,
-      "basePrice": "700"
+      "basePrice": "300"
     },
     {
-      "id": 2,
+      "id": 4,
       "name": "Iphone 13 pro",
-      "taxAmount": 25,
+      "taxAmount": 21,
       "basePrice": "1000"
-    },
-    {
-      "id": 3,
-      "name": "Samsung Galaxy S11",
-      "taxAmount": 15,
-      "basePrice": "650"
     }
   ]
 }

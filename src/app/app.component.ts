@@ -11,6 +11,7 @@ import { getShoppingListItems } from './shared/store/app.selector';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'LoginVDIAssignment';
   shoppingItems$!: Observable<ShoppingItem[]>;
 
     constructor(private store: Store<AppState>) { }

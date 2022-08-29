@@ -13,9 +13,9 @@ import { EditComponent } from './edit-product/edit.component';
 import { CartDetailsComponent } from '../cart/cart-details.component/cart-details.component';
 import { CartItemsComponent } from '../cart/cart-details.component/cart-items.component';
 import { OrderDetailsComponent } from '../order/order-details.component';
-
+import { OrderListComponent } from '../order/order-list.component';
 @NgModule({
-  declarations: [HomeComponent, AddComponent, EditComponent, CartDetailsComponent, CartItemsComponent, OrderDetailsComponent],
+  declarations: [HomeComponent, AddComponent, EditComponent, CartDetailsComponent, CartItemsComponent, OrderDetailsComponent, OrderListComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

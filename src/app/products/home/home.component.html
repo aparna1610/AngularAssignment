@@ -7,7 +7,6 @@
   <div class="row row-cols-1 row-cols-md-3 g-4 margin-bottom">
     <div class="col" *ngFor="let product of products$ | async">
       <div class="card">
-        <!-- <img src="/assets/product.png" class="card-img-top" alt="..." /> -->
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
         </div>
@@ -30,26 +29,7 @@
   <div class="row margin-bottom">
     <div class="col">
       <app-cart-items></app-cart-items>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are sure to delete this item?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-danger" (click)="delete()">Confirm Delete</button> -->
-      </div>
+      <app-order-list></app-order-list>
     </div>
   </div>
 </div>

@@ -23,10 +23,6 @@ export class HomeComponent implements OnInit {
   idToDelete: number = 0;
 
   ngOnInit(): void {
-    this.deleteModal = new window.bootstrap.Modal(
-      document.getElementById('deleteModal')
-    );
-
     this.store.dispatch(invokeProductsAPI());
   }
 
@@ -47,6 +43,6 @@ export class HomeComponent implements OnInit {
         product: selectedProduct
     } as ShoppingItem;
 
-    this.store.dispatch(AddProductToCart( { apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [newShoppingItem] } }));
+    this.store.dispatch(AddProductToCart( { apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [newShoppingItem],  order: [] } }));
 }
 }

@@ -6,7 +6,7 @@ import { ShoppingItem } from 'src/app/products/store/shoppingItems';
 import { Order } from 'src/app/products/store/order';
 import { AppState } from 'src/app/shared/store/appstate';
 import { ProductsService } from 'src/app/products/products.service';
-import { deleteItemFromCart, setAPIStatus, updateItemFromCart } from 'src/app/shared/store/app.action';
+import { deleteItemFromCart, setAPIStatus, showOrderDetails, updateItemFromCart } from 'src/app/shared/store/app.action';
 import { getShoppingListItems } from 'src/app/shared/store/app.selector';
 import { selectAppState } from '../../shared/store/app.selector';
 
@@ -60,36 +60,28 @@ export class CartDetailsComponent implements OnInit {
         newOrder.orderDate = new Date();
         newOrder.shoppingItem = this.items;
         newOrder.orderTotal = this.cartSubtotal;
-
-        this.productService.addToCart(newOrder)
-            .subscribe(
-                (response: any) => this.order = response,
-                (error: any) => { },
-                () => {
-                    this.afterOrderCreated();
-                }
-            );
+        this.store.dispatch(showOrderDetails( { apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [],  order: [newOrder] } }));
+        this.afterOrderCreated();
     }
 
-    delete(id: number) {
+    delete(item: ShoppingItem) {
       this.store.dispatch(
         deleteItemFromCart({
-          id: id,
+          id: item.product.id,
         })
       );
       let apiStatus$ = this.store.pipe(select(selectAppState));
       apiStatus$.subscribe((apState) => {
         if (apState.apiStatus == 'success') {
           this.store.dispatch(
-            setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [] } })
+            setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [ ], order: [] } })
           );
         }
       });
     }
 
     afterOrderCreated(): void {
-        //this.store.dispatch(new DeleteAllItemAction());
         this.isOrderCreated = true;
-        this.router.navigate(['/order-detail', this.order.orderId]);
+        this.router.navigate(['/order-detail']);
     }
 }

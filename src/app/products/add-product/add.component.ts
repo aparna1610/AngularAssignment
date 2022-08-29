@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { v4 as uuid } from 'uuid';
 import { select, Store } from '@ngrx/store';
 import { setAPIStatus } from 'src/app/shared/store/app.action';
 import { selectAppState } from 'src/app/shared/store/app.selector';
@@ -36,7 +35,7 @@ export class AddComponent implements OnInit {
     apiStatus$.subscribe((apiState) => {
       if (apiState.apiStatus == 'success') {
         this.appStore.dispatch(
-          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [] } })
+          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '', shopping: [], order: [] } })
         );
          this.router.navigate(['/']);
       }

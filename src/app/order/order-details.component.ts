@@ -1,31 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductsService } from '../products/products.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Order } from '../products/store/order';
+import { getOrderDetailsByIdDetails } from '../shared/store/app.selector';
+import { AppState } from '../shared/store/appstate';
 
 @Component({
     selector: 'app-order-details',
     templateUrl: './order-details.component.html'
 })
 export class OrderDetailsComponent implements OnInit {
-    order = { shoppingItem: [] } as unknown as Order;
+    order$!: Observable<Order | undefined>;
 
-    constructor(private productService: ProductsService, private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute,private store: Store<AppState>) { }
 
     ngOnInit() {
-        // this.route.params.subscribe(
-        //     params => {
-        //         const id = +params.code;
-        //         this.getOrder(id);
-        //     }
-        // );
+        this.route.params.subscribe(
+            params => {
+                const id = +params['id'];
+                this.order$ = this.store.select(getOrderDetailsByIdDetails(id));
+            }
+        );
     }
-
-    // getOrder(id: number): void {
-    //     this.orderService.getWithId(id)
-    //         .subscribe(
-    //             data => this.order = data,
-    //             error => { }
-    //         );
-    // }
 }
