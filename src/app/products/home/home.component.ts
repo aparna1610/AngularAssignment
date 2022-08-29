@@ -31,11 +31,6 @@ export class HomeComponent implements OnInit {
      return priceWithTax;
 }
 
-  openDeleteModal(code: number) {
-    this.idToDelete = code;
-    this.deleteModal.show();
-  }
-
   addToCart(selectedProduct: Products): void {
     const newShoppingItem = {
         quantity: 1,
