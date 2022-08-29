@@ -1,0 +1,55 @@
+<div class="container mt-2">
+  <div class="row margin-bottom">
+    <div class="col col-md-4 offset-md-4 ">
+      <a routerLink="/add" class="btn btn-dark">Add A New Product</a>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4 margin-bottom">
+    <div class="col" *ngFor="let product of products$ | async">
+      <div class="card">
+        <!-- <img src="/assets/product.png" class="card-img-top" alt="..." /> -->
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Product Name : {{ product.name }}</li>
+          <li class="list-group-item">Base Price : {{ product.basePrice  | currency}}</li>
+          <li class="list-group-item">Base Price (inc. GST) : {{ CalculateTotalPrice(product.basePrice, product.taxAmount) | currency }}</li>
+        </ul>
+        <div class="card-body">
+          <a [routerLink]="['/edit', product.id]" class="btn btn-dark"
+            >Edit Product</a
+          >
+          <button class="btn btn-dark margin-left"
+          (click)="addToCart(product)">Add to Cart <i class="fa fa-shopping-cart"></i></button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row margin-bottom">
+    <div class="col">
+      <app-cart-items></app-cart-items>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are sure to delete this item?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-danger" (click)="delete()">Confirm Delete</button> -->
+      </div>
+    </div>
+  </div>
+</div>

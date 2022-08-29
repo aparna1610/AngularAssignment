@@ -1,0 +1,29 @@
+<div class="card" *ngIf="(shoppingItems$ | async)?.length">
+    <div class="card-header">Cart</div>
+    <div class="card-body">
+      <ng-container>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Product Code</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+          <tbody>
+            <tr *ngFor="let item of shoppingItems$ | async">
+              <td style="border: 0">{{ item.product.name }}</td>
+              <td style="border: 0">{{ item.product.id }}</td>
+              <td style="border: 0">{{ item.Totalprice | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div> <button type="button" class="btn btn-success" routerLink="/cart-detail">Checkout</button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!(shoppingItems$ | async)">
+        <p>Your cart is empty!</p>
+      </ng-container>
+    </div>
+  </div>
+  
